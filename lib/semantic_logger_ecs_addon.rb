@@ -1,3 +1,10 @@
 # frozen_string_literal: true
 
-require "semantic_logger_ecs_addon/identity"
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.for_gem
+loader.setup
+
+# Main namespace.
+module SemanticLoggerEcsAddon
+end

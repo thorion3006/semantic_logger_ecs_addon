@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Sajeev Ramasamy"]
   spec.email = ["thorion3006@gmail.com"]
   spec.homepage = "https://github.com/thorion3006/semantic_logger_ecs_addon"
-  spec.summary = ""
+  spec.summary = SemanticLoggerEcsAddon::Identity::SUMMARY
   spec.license = "MIT"
 
   spec.metadata = {
@@ -22,7 +22,9 @@ Gem::Specification.new do |spec|
   spec.signing_key = Gem.default_key_path
   spec.cert_chain = [Gem.default_cert_path]
 
-  spec.required_ruby_version = "~> 3.0"
+  spec.required_ruby_version = ">= 2.7", "< 4"
+  spec.add_runtime_dependency "semantic_logger", "~> 4.4"
+  spec.add_runtime_dependency "zeitwerk", "~> 2.4"
 
   spec.files = Dir["lib/**/*"]
   spec.extra_rdoc_files = Dir["README*", "LICENSE*"]
