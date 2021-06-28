@@ -162,11 +162,13 @@ module SemanticLoggerEcsAddon
       end
 
       def format_payload
-        return unless log.payload.respond_to?(:empty?) && !log.payload.empty?
+        if log.payload.respond_to?(:empty?) && !log.payload.empty?
+          self.formatted_payload = Utils::Hash[**log.payload]
 
-        self.formatted_payload = Utils::Hash[**log.payload]
-
-        rack_extract
+          rack_extract
+        else
+          self.formatted_payload = {}
+        end
       end
 
       def request
