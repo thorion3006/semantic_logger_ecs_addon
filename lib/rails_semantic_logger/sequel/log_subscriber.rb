@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsSemanticLogger
   module Sequel
     class LogSubscriber < ActiveSupport::LogSubscriber

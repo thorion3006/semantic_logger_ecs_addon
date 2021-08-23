@@ -5,8 +5,8 @@ module SemanticLoggerEcsAddon
   module Identity
     NAME = "semantic_logger_ecs_addon"
     LABEL = "Semantic Logger Ecs Addon"
-    VERSION = "0.1.4"
+    VERSION = "0.1.5"
     VERSION_LABEL = "#{LABEL} #{VERSION}"
-    SUMMARY = "A semantic logger formatter that formats the logs according to Elastic Common Schema and adds APM trace data if ElasticAPM is enabled."
+    SUMMARY = "A semantic logger formatter that formats the logs according to Elastic Common Schema, adds APM trace data if ElasticAPM is enabled and instruments sequel logs for rails if available."
   end
 end
