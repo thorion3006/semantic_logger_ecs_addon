@@ -145,7 +145,9 @@ module SemanticLoggerEcsAddon
       end
 
       def rack_metrics
-        metrics_keys = formatted_payload.keys.select { |k| k.to_s.end_with?("_runtime") }
+        metrics_keys = formatted_payload.keys.select do |k|
+          k.to_s.end_with? "_runtime", "_count"
+        end
         formatted_payload[:metrics].merge! formatted_payload.extract!(:allocations, *metrics_keys)
         formatted_payload[:metrics][:object_allocations] =
           formatted_payload[:metrics].delete :allocations
