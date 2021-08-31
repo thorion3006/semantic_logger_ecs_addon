@@ -6,9 +6,7 @@ if defined?(Sequel)
   if defined? ActiveSupport::LogSubscriber
     require_relative "rails_semantic_logger/sequel/log_subscriber"
   end
-  if defined?(ActiveSupport::Notifications)
-    require_relative "sequel/database/active_support_notification"
-  end
+  require_relative "sequel/database" if defined?(ActiveSupport::Notifications)
   require_relative "sequel/railties/controller_runtime" if defined?(ActionController)
 end
 
