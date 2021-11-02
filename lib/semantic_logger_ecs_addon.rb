@@ -4,9 +4,9 @@ require "pathname"
 require "zeitwerk"
 
 loader = Zeitwerk::Loader.for_gem
-loader.ignore "rails_semantic_logger"
-loader.ignore "sequel"
-loader.ignore "semantic_logger_ecs_addon/sequel.rb"
+loader.ignore "#{__dir__}/rails_semantic_logger"
+loader.ignore "#{__dir__}/sequel"
+loader.ignore "#{__dir__}/semantic_logger_ecs_addon/sequel.rb"
 loader.setup
 
 # Main namespace.
