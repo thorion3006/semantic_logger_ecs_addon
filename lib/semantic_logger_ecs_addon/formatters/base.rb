@@ -164,7 +164,7 @@ module SemanticLoggerEcsAddon
       end
 
       def format_payload
-        if log.payload.respond_to?(:empty?) && !log.payload.empty?
+        if log.payload.respond_to?(:empty?) && !log.payload.empty? && log.payload.respond_to?(:has_key?)
           self.formatted_payload = Utils::Hash[**log.payload]
 
           rack_extract
@@ -203,7 +203,7 @@ module SemanticLoggerEcsAddon
       def apm_agent_present_and_running?
         return false unless defined?(::ElasticAPM)
 
-        ElasticAPM.running?
+        ::ElasticAPM.running?
       end
     end
   end
