@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.cert_chain = [Gem.default_cert_path]
 
   spec.required_ruby_version = ">= 2.7", "< 4"
+  spec.add_runtime_dependency "oj", "~> 3.13"
   spec.add_runtime_dependency "request_store", "~> 1.5"
   spec.add_runtime_dependency "semantic_logger", "~> 4.4"
   spec.add_runtime_dependency "zeitwerk", "~> 2.4"

@@ -82,7 +82,7 @@ module SemanticLoggerEcsAddon
       end
 
       def extras
-        return unless formatted_payload.respond_to?(:empty?) && !formatted_payload.empty?
+        return unless formatted_payload.respond_to?(:empty?) && !formatted_payload.empty? && formatted_payload.respond_to?(:has_key?)
 
         hash.merge! formatted_payload.except(:request, :response, :user)
       end

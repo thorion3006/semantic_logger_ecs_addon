@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "json"
+require "oj"
 
 module SemanticLoggerEcsAddon
   module Formatters
@@ -12,7 +12,7 @@ module SemanticLoggerEcsAddon
 
       # Returns log messages in JSON format
       def call log, logger
-        super(log, logger).to_json
+        Oj.dump(super(log, logger), nilnil: true, symbol_keys: true, escape_mode: :json, mode: :rails)
       end
     end
   end
