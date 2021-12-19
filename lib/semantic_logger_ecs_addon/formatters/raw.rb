@@ -29,6 +29,8 @@ module SemanticLoggerEcsAddon
             root = root[:"error.cause"]
           end
         end
+      rescue SystemStackError => _error
+        root.merge! exception_hash exception
       end
 
       def event
@@ -81,10 +83,18 @@ module SemanticLoggerEcsAddon
         hash[:"user.domain"] = formatted_payload.dig :user, :type
       end
 
+      def safe_jsonify hash
+        hash.each do |k, v|
+          hash[k] = v.respond_to?(:to_json) ? v.to_json : v.inspect
+        rescue SystemStackError => _error
+          hash[k] = v.inspect
+        end
+      end
+
       def extras
         return unless formatted_payload.respond_to?(:empty?) && !formatted_payload.empty? && formatted_payload.respond_to?(:has_key?)
 
-        hash.merge! formatted_payload.except(:request, :response, :user)
+        hash.merge!(safe_jsonify(formatted_payload.except(:request, :response, :user)))
       end
 
       # Returns log messages in Hash format

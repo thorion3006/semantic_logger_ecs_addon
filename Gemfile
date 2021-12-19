@@ -13,6 +13,8 @@ group :code_quality do
   gem "rubocop-rake", "~> 0.5"
   gem "rubocop-rspec", "~> 2.0"
   gem "simplecov", "~> 0.20"
+  # gem "solargraph", "~> 0.44"
+  # gem "standard", "~> 1.5"
 end
 
 group :development do

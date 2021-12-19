@@ -12,7 +12,9 @@ module SemanticLoggerEcsAddon
 
       # Returns log messages in JSON format
       def call log, logger
-        Oj.dump(super(log, logger), nilnil: true, symbol_keys: true, escape_mode: :json, mode: :rails)
+        Oj.dump(super(log, logger), nilnil: true, escape_mode: :json, mode: :rails)
+      rescue SystemStackError => _error
+        Oj.dump(super(log, logger).transform_keys {|key| key.to_s }, nilnil: true, escape_mode: :json, mode: :object)
       end
     end
   end
