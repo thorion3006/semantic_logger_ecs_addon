@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/core_ext/module/attr_internal"
-unless defined?(RailsSemanticLogger::Sequel::LogSubscriber)
-  require_relative "../../rails_semantic_logger/sequel/log_subscriber"
-end
+require "rails_semantic_logger/sequel/log_subscriber"
 
 module Sequel
   module Railties

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "semantic_logger_ecs_addon/formatters/base"
+
 module SemanticLoggerEcsAddon
   module Formatters
     class Raw < Base
@@ -92,7 +94,9 @@ module SemanticLoggerEcsAddon
       end
 
       def extras
-        return unless formatted_payload.respond_to?(:empty?) && !formatted_payload.empty? && formatted_payload.respond_to?(:has_key?)
+        unless formatted_payload.respond_to?(:empty?) && !formatted_payload.empty? && formatted_payload.respond_to?(:has_key?)
+          return
+        end
 
         hash.merge!(safe_jsonify(formatted_payload.except(:request, :response, :user)))
       end

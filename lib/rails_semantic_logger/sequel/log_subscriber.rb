@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "request_store_rails"
+require "semantic_logger"
+
 module RailsSemanticLogger
   module Sequel
     class LogSubscriber < ActiveSupport::LogSubscriber
@@ -9,20 +12,20 @@ module RailsSemanticLogger
 
       def self.runtime= value
         # ::ActiveRecord::RuntimeRegistry.sql_runtime = value
-        RequestStore.store[:sql_runtime] = value
+        RequestLocals.store[:sql_runtime] = value
       end
 
       def self.runtime
         # ::ActiveRecord::RuntimeRegistry.sql_runtime ||= 0
-        RequestStore.fetch(:sql_runtime) { 0 }
+        RequestLocals.fetch(:sql_runtime) { 0 }
       end
 
       def self.count= value
-        RequestStore.store[:sql_count] = value
+        RequestLocals.store[:sql_count] = value
       end
 
       def self.count
-        RequestStore.fetch(:sql_count) { 0 }
+        RequestLocals.fetch(:sql_count) { 0 }
       end
 
       def self.reset_runtime

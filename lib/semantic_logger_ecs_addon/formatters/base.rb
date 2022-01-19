@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "semantic_logger/formatters/base"
+require "semantic_logger_ecs_addon/utils/hash"
 
 module SemanticLoggerEcsAddon
   module Formatters
@@ -176,13 +177,17 @@ module SemanticLoggerEcsAddon
       def request
         hash[:"http.request.id"] = formatted_payload.dig :request, :request_id
         hash[:"http.request.body.content"] = formatted_payload.dig :request, :body
-        hash[:"http.request.body.content"] = hash[:"http.request.body.content"].to_json if hash[:"http.request.body.content"].respond_to?(:to_json)
+        if hash[:"http.request.body.content"].respond_to?(:to_json)
+          hash[:"http.request.body.content"] = hash[:"http.request.body.content"].to_json
+        end
         hash[:"http.request.method"] = formatted_payload.dig :request, :method
       end
 
       def response
         hash[:"http.response.body.content"] = formatted_payload.dig :response, :body
-        hash[:"http.response.body.content"] = hash[:"http.response.body.content"].to_json if hash[:"http.response.body.content"].respond_to?(:to_json)
+        if hash[:"http.response.body.content"].respond_to?(:to_json)
+          hash[:"http.response.body.content"] = hash[:"http.response.body.content"].to_json
+        end
         hash[:"http.response.status_code"] = formatted_payload.dig :response, :status
       end
 

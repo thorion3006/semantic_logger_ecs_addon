@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "oj"
+require "semantic_logger_ecs_addon/formatters/raw"
 
 module SemanticLoggerEcsAddon
   module Formatters
@@ -14,7 +15,14 @@ module SemanticLoggerEcsAddon
       def call log, logger
         Oj.dump(super(log, logger), nilnil: true, escape_mode: :json, mode: :rails)
       rescue SystemStackError => _error
-        Oj.dump(super(log, logger).transform_keys {|key| key.to_s }, nilnil: true, escape_mode: :json, mode: :object)
+        Oj.dump(
+          super(log, logger).transform_keys do |key|
+            key.to_s
+          end,
+          nilnil: true,
+          escape_mode: :json,
+          mode: :object
+        )
       end
     end
   end

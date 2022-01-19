@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 require "pathname"
-require "zeitwerk"
-
-loader = Zeitwerk::Loader.for_gem
-loader.ignore "#{__dir__}/rails_semantic_logger"
-loader.ignore "#{__dir__}/sequel"
-loader.ignore "#{__dir__}/semantic_logger_ecs_addon/sequel.rb"
-loader.setup
+require "semantic_logger_ecs_addon/utils/backtrace_cleaner"
+require "semantic_logger_ecs_addon/utils/hash"
+require "semantic_logger_ecs_addon/formatters/base"
+require "semantic_logger_ecs_addon/formatters/json"
+require "semantic_logger_ecs_addon/formatters/raw"
 
 # Main namespace.
 module SemanticLoggerEcsAddon
